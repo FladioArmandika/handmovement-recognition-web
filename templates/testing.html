@@ -20,7 +20,7 @@
                 background-color: none;">
             <ul class="flex-column nav">
                 <li class="nav-item"><a href="/" class="nav-link">Beranda</a></li>
-                <li class="nav-item"><a href="/train" class=" nav-link">Pengujian</a></li>
+                <li class="nav-item"><a href="/testing" class=" nav-link">Pengujian</a></li>
                 <li class="nav-item"><a href="/help" class=" nav-link">Bantuan</a></li>
             </ul>
         </div>
@@ -29,11 +29,13 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-7">
-                            <video autoplay
+                            <!-- <video autoplay
                                 style="width: 100%;"></video>
                             <img src="">
-                            <canvas style="display:none;"></canvas>
+                            <canvas style="display:none;"></canvas> -->
             
+                            <img id="bg" class="center" src="{{ url_for('video_feed') }}">
+
                             <script>
                                 const constraints = {
                                   video: true
@@ -131,6 +133,8 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
                     </div>
                 </div>
             </div>
