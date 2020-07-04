@@ -1,0 +1,7 @@
+tensorflow==2.0.1
+numpy
+lxml
+tqdm
+flask
+seaborn
+pillow

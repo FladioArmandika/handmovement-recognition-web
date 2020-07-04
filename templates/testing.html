@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Action Recognition</title>
+
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+</head>
+<body style="background: white;">
+    <nav class="navbar navbar-light ">
+        <div class="container">
+            <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Action Recognition</a>
+        </div>
+    </nav>
+    <div style="display: flex;" class="container mt-5">
+        <div style="
+                width: 150px;
+                height: 100vh;
+                background-color: none;">
+            <ul class="flex-column nav">
+                <li class="nav-item"><a href="/" class="nav-link">Beranda</a></li>
+                <li class="nav-item"><a href="/train" class=" nav-link">Pengujian</a></li>
+                <li class="nav-item"><a href="/help" class=" nav-link">Bantuan</a></li>
+            </ul>
+        </div>
+        <div class="container">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-7">
+                            <video autoplay
+                                style="width: 100%;"></video>
+                            <img src="">
+                            <canvas style="display:none;"></canvas>
+            
+                            <script>
+                                const constraints = {
+                                  video: true
+                                };
+                                
+                                const video = document.querySelector('video');
+                                
+                                navigator.mediaDevices.getUserMedia(constraints).
+                                  then((stream) => {video.srcObject = stream});
+                            </script>
+            
+                            <script>
+                                const videoElement = document.querySelector('video');
+                                const audioSelect = document.querySelector('select#audioSource');
+                                const videoSelect = document.querySelector('select#videoSource');
+            
+                                navigator.mediaDevices.enumerateDevices()
+                                .then(gotDevices).then(getStream).catch(handleError);
+            
+                                audioSelect.onchange = getStream;
+                                videoSelect.onchange = getStream;
+            
+                                function gotDevices(deviceInfos) {
+                                for (let i = 0; i !== deviceInfos.length; ++i) {
+                                    const deviceInfo = deviceInfos[i];
+                                    const option = document.createElement('option');
+                                    option.value = deviceInfo.deviceId;
+                                    if (deviceInfo.kind === 'audioinput') {
+                                    option.text = deviceInfo.label ||
+                                        'microphone ' + (audioSelect.length + 1);
+                                    audioSelect.appendChild(option);
+                                    } else if (deviceInfo.kind === 'videoinput') {
+                                    option.text = deviceInfo.label || 'camera ' +
+                                        (videoSelect.length + 1);
+                                    videoSelect.appendChild(option);
+                                    } else {
+                                    console.log('Found another kind of device: ', deviceInfo);
+                                    }
+                                }
+                                }
+            
+                                function getStream() {
+                                if (window.stream) {
+                                    window.stream.getTracks().forEach(function(track) {
+                                    track.stop();
+                                    });
+                                }
+            
+                                const constraints = {
+                                    audio: {
+                                    deviceId: {exact: audioSelect.value}
+                                    },
+                                    video: {
+                                    deviceId: {exact: videoSelect.value}
+                                    }
+                                };
+            
+                                navigator.mediaDevices.getUserMedia(constraints).
+                                    then(gotStream).catch(handleError);
+                                }
+            
+                                function gotStream(stream) {
+                                window.stream = stream; // make stream available to console
+                                videoElement.srcObject = stream;
+                                }
+            
+                                function handleError(error) {
+                                console.error('Error: ', error);
+                                }
+                            </script>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="nama-kelas">
+                                <span>Left</span>
+                                <div class="progress mt-2" style="height: 20px;">
+                                    <div class="progress-bar" style="width: 0%"></div>
+                                </div>
+                            </div>
+                            <div class="nama-kelas mt-3">
+                                <span>Right</span>
+                                <div class="progress mt-2" style="height: 20px;">
+                                    <div class="progress-bar" style="width: 0%"></div>
+                                </div>
+                            </div>
+                            <div class="nama-kelas mt-3">
+                                <span>Ok</span>
+                                <div class="progress mt-2" style="height: 20px;">
+                                    <div class="progress-bar" style="width: 0%"></div>
+                                </div>
+                            </div>
+                            <div class="nama-kelas mt-3">
+                                <span>Call</span>
+                                <div class="progress mt-2" style="height: 20px;">
+                                    <div class="progress-bar" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    
+
+    <script src="../static/js/bootstrap.min.js"></script>
+</body>
+</html>
