@@ -5,14 +5,19 @@ from models.predict import recognize
 from cv2 import cv2
 import numpy as np
 import os
+<<<<<<< HEAD
 import json
+=======
 
 
 from flask_cors import CORS, cross_origin
 
+<<<<<<< HEAD
 
 frames = []
 
+=======
+>>>>>>> e3318b790a80030eb1e9eea46375aa9aad70dd5a
 # Initializing flask application
 app = Flask(__name__)
 run_with_ngrok(app)
@@ -36,6 +41,7 @@ def video_feed():
                     mimetype='multipart/x-mixed-replace; boundary=frame')
     # return Response(predict(VideoCamera()))
 
+<<<<<<< HEAD
 @app.route('/recognize', methods=['POST'])
 def startRecognize():
     print('start recognizing')
@@ -80,14 +86,26 @@ def gen(camera):
     
     global frames
 
+=======
+
+def gen(camera):
+    frames = []
+>>>>>>> e3318b790a80030eb1e9eea46375aa9aad70dd5a
     while True:
         frame = camera.get_frame()
         frames.append(frame)
 
+<<<<<<< HEAD
         # print(len(frames))
 
         if(len(frames) == 20):
             # recognize(frames)    
+=======
+        print(len(frames))
+
+        if(len(frames) == 20):
+            recognize(frames)
+>>>>>>> e3318b790a80030eb1e9eea46375aa9aad70dd5a
             frames = []
 
         ret, jpeg = cv2.imencode('.jpg', frame)
