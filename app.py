@@ -69,7 +69,7 @@ def startRecognize():
     # result = jsonify(result)
 
     
-
+    # JADIII
 
     return jsonify(isError= False,
                     message= "Success",
