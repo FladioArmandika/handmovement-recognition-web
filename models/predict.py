@@ -37,7 +37,6 @@ def recognize(frames):
     #decode   
     decodedFrames = []
     for stackedFrame in stackedFrames:
-        # decodedFrame = tf.image.decode_jpeg(stackedFrame)
         decodedFrame = tf.cast(stackedFrame, tf.float32)
         decodedFrames.append(decodedFrame)
 
@@ -48,12 +47,6 @@ def recognize(frames):
     for decodedFrame in decodedFrames:
         result = predict(decodedFrame)
         results.append(result)
-
-    # counts = np.bincount(results)
-    # result = np.argmax(counts)
-    # print('result : ' + str(results[0]))
-
-    # print(results)
 
     return results
 

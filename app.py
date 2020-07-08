@@ -5,20 +5,14 @@ from models.predict import recognize
 from cv2 import cv2
 import numpy as np
 import os
-<<<<<<< HEAD
 import json
-=======
->>>>>>> e3318b790a80030eb1e9eea46375aa9aad70dd5a
 
 
 from flask_cors import CORS, cross_origin
 
-<<<<<<< HEAD
 
 frames = []
 
-=======
->>>>>>> e3318b790a80030eb1e9eea46375aa9aad70dd5a
 # Initializing flask application
 app = Flask(__name__)
 run_with_ngrok(app)
@@ -42,7 +36,6 @@ def video_feed():
                     mimetype='multipart/x-mixed-replace; boundary=frame')
     # return Response(predict(VideoCamera()))
 
-<<<<<<< HEAD
 @app.route('/recognize', methods=['POST'])
 def startRecognize():
     print('start recognizing')
@@ -57,11 +50,6 @@ def startRecognize():
         print(result)
         results.append(result)
 
-    # data = json.dumps(data,separators=(',', ':'))
-    # data = json.loads(str(data))
-    # listdata =  np.array(data).tolist()
-    # data = json.dumps(listdata)
-
     print('hasil : ')
     print(results)
 
@@ -73,11 +61,7 @@ def startRecognize():
 
     listdata = np.array(result).tolist()
     result = json.dumps(listdata)
-    # result = jsonify(result)
-
     
-    # JADIII
-
     return jsonify(isError= False,
                     message= "Success",
                     statusCode= 200,
@@ -87,26 +71,11 @@ def gen(camera):
     
     global frames
 
-=======
-
-def gen(camera):
-    frames = []
->>>>>>> e3318b790a80030eb1e9eea46375aa9aad70dd5a
     while True:
         frame = camera.get_frame()
         frames.append(frame)
 
-<<<<<<< HEAD
-        # print(len(frames))
-
         if(len(frames) == 20):
-            # recognize(frames)    
-=======
-        print(len(frames))
-
-        if(len(frames) == 20):
-            recognize(frames)
->>>>>>> e3318b790a80030eb1e9eea46375aa9aad70dd5a
             frames = []
 
         ret, jpeg = cv2.imencode('.jpg', frame)
@@ -117,5 +86,4 @@ def gen(camera):
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 3000))
-    # app.run(host='0.0.0.0',port=port)
     app.run()
