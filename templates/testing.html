@@ -29,10 +29,6 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-7">
-                            <!-- <video autoplay
-                                style="width: 100%;"></video>
-                            <img src="">
-                            <canvas style="display:none;"></canvas> -->
             
                             <img id="bg" class="center" src="{{ url_for('video_feed') }}">
 
@@ -98,7 +94,7 @@
                                 }
             
                                 function gotStream(stream) {
-                                window.stream = stream; // make stream available to console
+                                window.stream = stream;
                                 videoElement.srcObject = stream;
                                 }
             
@@ -161,7 +157,6 @@
                     success: function(result){
                         alert(JSON.stringify(result.data))
                         $('.loading').hide();
-                        // console.log(JSON.stringify(result.data))
                     }
                 });
             }
